@@ -73,8 +73,6 @@ export async function POST(request: Request) {
         initialCash,
         maxPosition,
         tradeSize,
-        sellAfterDays: 0,
-        sellTargetPct: 0,
       },
       sellAfterDaysList,
       sellTargetPctList
