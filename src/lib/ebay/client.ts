@@ -88,7 +88,7 @@ export async function fetchEbayProduct(itemId: string): Promise<EbayProduct | nu
   }
 
   const json = (await res.json()) as EbayProductResponse;
-  const d = json?.data ?? json;
+  const d = (json?.data ?? json) as Record<string, unknown>;
   if (!d || typeof d !== "object") return null;
 
   const price =
@@ -103,19 +103,19 @@ export async function fetchEbayProduct(itemId: string): Promise<EbayProduct | nu
   const imageUrl =
     typeof imageVal === "string"
       ? imageVal
-      : typeof imageVal === "object" && imageVal?.image_url
-        ? String(imageVal.image_url)
+      : typeof imageVal === "object" && imageVal && "image_url" in imageVal
+        ? String((imageVal as { image_url?: unknown }).image_url)
         : undefined;
   return {
     itemId: String(d.item_id ?? d.itemId ?? id),
     title: String(d.title ?? ""),
     price,
     currency: "USD",
-    url: d.item_web_url ?? d.url,
-    condition: d.condition as string | undefined,
+    url: typeof d.item_web_url === "string" ? d.item_web_url : typeof d.url === "string" ? d.url : undefined,
+    condition: typeof d.condition === "string" ? d.condition : undefined,
     imageUrl,
-    createdAt: d.item_creation_date,
-    endedAt: d.item_end_date ?? d.end_time,
+    createdAt: typeof d.item_creation_date === "string" ? d.item_creation_date : undefined,
+    endedAt: typeof d.item_end_date === "string" ? d.item_end_date : typeof d.end_time === "string" ? d.end_time : undefined,
   };
 }
 
