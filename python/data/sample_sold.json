@@ -1,0 +1,12 @@
+[
+  { "itemId": "1", "price": 95, "soldDate": "2024-01-15T12:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "2", "price": 102, "soldDate": "2024-01-18T14:30:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "3", "price": 98, "soldDate": "2024-01-22T09:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "4", "price": 105, "soldDate": "2024-01-25T16:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "5", "price": 100, "soldDate": "2024-01-28T11:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "6", "price": 108, "soldDate": "2024-02-01T10:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "7", "price": 103, "soldDate": "2024-02-05T15:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "8", "price": 110, "soldDate": "2024-02-10T08:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "9", "price": 97, "soldDate": "2024-02-14T13:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" },
+  { "itemId": "10", "price": 112, "soldDate": "2024-02-18T17:00:00Z", "title": "2024 Anthony Edwards Prizm PSA 10" }
+]

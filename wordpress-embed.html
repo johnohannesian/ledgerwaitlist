@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ledger — Waitlist</title>
+  <link rel="stylesheet" type="text/css" href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: #000000;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 28rem;
+      width: 100%;
+    }
+    
+    h1 {
+      font-size: clamp(3rem, 8vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+    
+    .tagline {
+      font-size: clamp(1.125rem, 2vw, 1.25rem);
+      color: #d1d5db;
+      margin-bottom: 2.5rem;
+    }
+    
+    .waitlist-wrapper {
+      width: 100%;
+      margin-top: 2.5rem;
+    }
+    
+    /* Animation container */
+    #sales-animation {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    
+    .animated-item {
+      position: absolute;
+      font-weight: 700;
+      font-size: clamp(1.125rem, 2vw, 1.5rem);
+      animation: fade-pop 3s ease-out forwards;
+      transform: translate(-50%, -50%);
+    }
+    
+    .animated-item.amount {
+      color: #22c55e;
+      text-shadow: 0 0 10px rgba(34, 197, 94, 0.5), 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+    
+    .animated-item.emoji {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    
+    @keyframes fade-pop {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      10% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      70% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9) translateY(-20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="sales-animation"></div>
+  
+  <div class="container">
+    <h1>Ledger</h1>
+    <p class="tagline">the world's first zero-fee trading card exchange</p>
+    <div class="waitlist-wrapper">
+      <div id="getWaitlistContainer" data-waitlist_id="32523" data-widget_type="WIDGET_2"></div>
+    </div>
+  </div>
+
+  <script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+  
+  <script>
+    (function() {
+      'use strict';
+      
+      const amounts = [
+        "$25", "$42", "$58", "$75", "$98", "$125", "$150", "$200", "$275",
+        "$350", "$450", "$550", "$675", "$850", "$1,200", "$1,500", "$2,000",
+        "$3,500", "$5,000", "$7,500", "$10,000", "$15,000", "$25,000"
+      ];
+      
+      const emojis = ["📈", "📊", "💹", "💰", "💵", "💸", "💲", "📉", "🎯", "📈", "💹"];
+      
+      function formatAmount() {
+        return amounts[Math.floor(Math.random() * amounts.length)];
+      }
+      
+      function getRandomEmoji() {
+        return emojis[Math.floor(Math.random() * emojis.length)];
+      }
+      
+      function generatePosition() {
+        const centerExclude = { min: 30, max: 70 };
+        let x, y;
+        do {
+          x = Math.random() * 100;
+          y = Math.random() * 100;
+        } while (
+          x >= centerExclude.min &&
+          x <= centerExclude.max &&
+          y >= centerExclude.min &&
+          y <= centerExclude.max
+        );
+        return { x, y };
+      }
+      
+      const container = document.getElementById('sales-animation');
+      if (!container) return;
+      
+      let itemIdCounter = 0;
+      const items = new Map();
+      
+      function addItem() {
+        const pos = generatePosition();
+        const isEmoji = Math.random() > 0.5;
+        const content = isEmoji ? getRandomEmoji() : formatAmount();
+        const id = ++itemIdCounter;
+        
+        const div = document.createElement('div');
+        div.className = 'animated-item ' + (isEmoji ? 'emoji' : 'amount');
+        div.style.left = pos.x + '%';
+        div.style.top = pos.y + '%';
+        div.textContent = content;
+        div.dataset.itemId = id.toString();
+        
+        container.appendChild(div);
+        items.set(id, div);
+        
+        setTimeout(function() {
+          if (items.has(id)) {
+            const el = items.get(id);
+            if (el && el.parentNode) {
+              el.parentNode.removeChild(el);
+            }
+            items.delete(id);
+          }
+        }, 3500);
+      }
+      
+      const interval = setInterval(function() {
+        if (Math.random() > 0.15) {
+          addItem();
+        }
+      }, 400 + Math.random() * 600);
+      
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', function() {
+        clearInterval(interval);
+      });
+    })();
+  </script>
+</body>
+</html>
