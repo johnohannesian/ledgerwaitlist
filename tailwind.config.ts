@@ -23,6 +23,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["DM Sans", "system-ui", "ui-sans-serif", "sans-serif"],
+        inter: ["Inter", "system-ui", "ui-sans-serif", "sans-serif"],
         mono: ["ui-monospace", "monospace"],
       },
       boxShadow: {

@@ -20,7 +20,7 @@ export default function RootLayout({
           href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"
         />
       </head>
-      <body className="min-h-screen font-sans antialiased bg-black text-white">
+      <body className="min-h-screen overflow-x-hidden font-sans antialiased bg-black text-white">
         {children}
       </body>
     </html>

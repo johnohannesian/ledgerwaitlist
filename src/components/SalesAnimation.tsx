@@ -24,23 +24,37 @@ function getRandomEmoji(): string {
   return emojis[Math.floor(Math.random() * emojis.length)]!;
 }
 
-/** Generate position avoiding center area (30-70% horizontally and vertically). */
+/** Generate position along screen edges so we never cover the central content area. */
 function generatePosition(): { x: number; y: number } {
-  const centerExclude = { min: 30, max: 70 };
-  let x: number;
-  let y: number;
-  
-  do {
-    x = Math.random() * 100;
-    y = Math.random() * 100;
-  } while (
-    x >= centerExclude.min &&
-    x <= centerExclude.max &&
-    y >= centerExclude.min &&
-    y <= centerExclude.max
-  );
-  
-  return { x, y };
+  const padding = 8; // avoid hard edges
+  const edge = Math.random();
+
+  if (edge < 0.25) {
+    // top band
+    return {
+      x: padding + Math.random() * (100 - 2 * padding),
+      y: 12,
+    };
+  }
+  if (edge < 0.5) {
+    // bottom band
+    return {
+      x: padding + Math.random() * (100 - 2 * padding),
+      y: 88,
+    };
+  }
+  if (edge < 0.75) {
+    // left band
+    return {
+      x: 6,
+      y: padding + Math.random() * (100 - 2 * padding),
+    };
+  }
+  // right band
+  return {
+    x: 94,
+    y: padding + Math.random() * (100 - 2 * padding),
+  };
 }
 
 export function SalesAnimation() {
