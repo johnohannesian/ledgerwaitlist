@@ -36,21 +36,6 @@ const BlobBackground = () => {
   );
 };
 
-const GiantArrow = () => {
-  return (
-    <svg
-      className="absolute w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] top-[10%] -left-[80px] sm:-left-[100px] z-0 pointer-events-none hidden sm:block"
-      style={{ filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.5))" }}
-      viewBox="0 0 200 200"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M20 180 C 60 180, 80 120, 120 100 C 150 85, 170 90, 180 110" stroke="#FF9FCA" strokeWidth="12" strokeLinecap="round" fill="none" />
-      <path d="M165 115 L 180 110 L 185 95" stroke="#FF9FCA" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    </svg>
-  );
-};
-
 /** Placeholder card image (data URI) so slabs always show something without external requests */
 const PLACEHOLDER_SLAB_DATA =
   "data:image/svg+xml," +
@@ -156,9 +141,6 @@ export function SignUpPage() {
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 max-w-[1440px] mx-auto w-full relative px-4 lg:px-0">
         <div className="pl-0 lg:pl-20 flex flex-col justify-center py-8 lg:py-0 relative">
-          <div className="absolute inset-0 flex items-center pointer-events-none" aria-hidden>
-            <GiantArrow />
-          </div>
           <div className="relative z-10">
           <div
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[13px] font-bold mb-5 bg-orange-500 text-black w-fit"
